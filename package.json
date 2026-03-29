@@ -1,0 +1,27 @@
+{
+  "name": "carequeue",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Smart Clinic Waitlist & No-Show Recovery System",
+  "scripts": {
+    "dev:api": "pnpm --filter @carequeue/api dev",
+    "dev:web": "pnpm --filter @carequeue/web dev",
+    "build": "pnpm -r build",
+    "db:generate": "pnpm --filter @carequeue/db generate",
+    "db:push": "pnpm --filter @carequeue/db db:push",
+    "db:migrate": "pnpm --filter @carequeue/db migrate",
+    "db:studio": "pnpm --filter @carequeue/db studio",
+    "db:seed": "pnpm --filter @carequeue/db seed",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "better-auth": "1.1.20"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15"
+  }
+}

@@ -1,0 +1,64 @@
+﻿src/routes/appointments.ts(114,29): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+src/routes/webhook.ts(184,27): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+src/scripts/test-phase3.ts(50,5): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/recovery.job.ts(23,5): error TS2322: Type 'Redis' is not assignable to type 'ConnectionOptions'.
+  Type 'Redis' is not assignable to type 'ClusterOptions | Redis | Cluster'.
+    Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/Redis").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/Redis").default'.
+      Types of property 'options' are incompatible.
+        Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/redis/RedisOptions").RedisOptions' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/redis/RedisOptions").RedisOptions'.
+          Type 'RedisOptions' is not assignable to type 'CommonRedisOptions'.
+            Types of property 'Connector' are incompatible.
+              Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined'.
+                Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default'.
+                  Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/AbstractConnector").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/AbstractConnector").default'.
+                    Property 'connecting' is protected but type 'AbstractConnector' is not a class derived from 'AbstractConnector'.
+../../packages/queue/src/recovery.job.ts(149,9): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/recovery.job.ts(160,7): error TS2322: Type 'Redis' is not assignable to type 'ConnectionOptions'.
+  Type 'Redis' is not assignable to type 'ClusterOptions | Redis | Cluster'.
+    Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/Redis").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/Redis").default'.
+      Types of property 'options' are incompatible.
+        Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/redis/RedisOptions").RedisOptions' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/redis/RedisOptions").RedisOptions'.
+          Type 'RedisOptions' is not assignable to type 'CommonRedisOptions'.
+            Types of property 'Connector' are incompatible.
+              Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined'.
+                Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default'.
+                  Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/AbstractConnector").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/AbstractConnector").default'.
+                    Property 'connecting' is protected but type 'AbstractConnector' is not a class derived from 'AbstractConnector'.
+../../packages/queue/src/recovery.job.ts(213,7): error TS2322: Type 'Redis' is not assignable to type 'ConnectionOptions'.
+  Type 'Redis' is not assignable to type 'ClusterOptions | Redis | Cluster'.
+    Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/Redis").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/Redis").default'.
+      Types of property 'options' are incompatible.
+        Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/redis/RedisOptions").RedisOptions' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/redis/RedisOptions").RedisOptions'.
+          Type 'RedisOptions' is not assignable to type 'CommonRedisOptions'.
+            Types of property 'Connector' are incompatible.
+              Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined'.
+                Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default'.
+                  Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/AbstractConnector").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/AbstractConnector").default'.
+                    Property 'connecting' is protected but type 'AbstractConnector' is not a class derived from 'AbstractConnector'.
+../../packages/queue/src/reminder.job.ts(19,5): error TS2322: Type 'Redis' is not assignable to type 'ConnectionOptions'.
+  Type 'Redis' is not assignable to type 'ClusterOptions | Redis | Cluster'.
+    Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/Redis").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/Redis").default'.
+      Types of property 'options' are incompatible.
+        Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/redis/RedisOptions").RedisOptions' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/redis/RedisOptions").RedisOptions'.
+          Type 'RedisOptions' is not assignable to type 'CommonRedisOptions'.
+            Types of property 'Connector' are incompatible.
+              Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined'.
+                Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default'.
+                  Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/AbstractConnector").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/AbstractConnector").default'.
+                    Property 'connecting' is protected but type 'AbstractConnector' is not a class derived from 'AbstractConnector'.
+../../packages/queue/src/reminder.job.ts(43,7): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/reminder.job.ts(53,7): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/reminder.job.ts(63,7): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/reminder.job.ts(73,7): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/reminder.job.ts(183,35): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ExtractNameType<DataTypeOrJob, DefaultNameType>'.
+../../packages/queue/src/reminder.job.ts(224,7): error TS2322: Type 'Redis' is not assignable to type 'ConnectionOptions'.
+  Type 'Redis' is not assignable to type 'ClusterOptions | Redis | Cluster'.
+    Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/Redis").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/Redis").default'.
+      Types of property 'options' are incompatible.
+        Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/redis/RedisOptions").RedisOptions' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/redis/RedisOptions").RedisOptions'.
+          Type 'RedisOptions' is not assignable to type 'CommonRedisOptions'.
+            Types of property 'Connector' are incompatible.
+              Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default | undefined'.
+                Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/ConnectorConstructor").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/ConnectorConstructor").default'.
+                  Type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.10.1/node_modules/ioredis/built/connectors/AbstractConnector").default' is not assignable to type 'import("C:/Users/Arya Verma/mern projects/clinic-app/node_modules/.pnpm/ioredis@5.9.3/node_modules/ioredis/built/connectors/AbstractConnector").default'.
+                    Property 'connecting' is protected but type 'AbstractConnector' is not a class derived from 'AbstractConnector'.

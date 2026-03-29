@@ -1,0 +1,20 @@
+{
+  "name": "@carequeue/auth",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./client": "./dist/client.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/client.ts --format esm --dts"
+  },
+  "dependencies": {
+    "@carequeue/db": "workspace:*",
+    "better-auth": "1.1.20"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}

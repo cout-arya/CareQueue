@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-5 py-2.5 rounded-clinical text-white font-medium text-sm
+           bg-gradient-to-br from-primary to-primary-light
+           hover:from-primary-dark hover:to-primary
+           transition-all duration-200 shadow-ambient
+           active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2.5 rounded-clinical font-medium text-sm
+           border border-outline/20 text-on-surface
+           hover:bg-surface-container-high
+           transition-all duration-200
+           active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply px-5 py-2.5 rounded-clinical text-white font-medium text-sm
+           bg-error hover:bg-error/90
+           transition-all duration-200
+           active:scale-[0.98];
+  }
+
+  .card {
+    @apply bg-surface-container-lowest rounded-xl p-5 shadow-ambient;
+  }
+
+  .card-flat {
+    @apply bg-surface-container-low rounded-xl p-5;
+  }
+
+  .badge {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .badge-urgent {
+    @apply badge bg-error-container text-on-error-container;
+  }
+
+  .badge-follow-up {
+    @apply badge bg-tertiary-fixed text-[#003ea8];
+  }
+
+  .badge-routine {
+    @apply badge bg-surface-container-high text-on-surface-variant;
+  }
+
+  .badge-status-scheduled {
+    @apply badge bg-secondary-container text-secondary;
+  }
+
+  .badge-status-confirmed {
+    @apply badge bg-primary-fixed text-primary-dark;
+  }
+
+  .badge-status-cancelled {
+    @apply badge bg-error-container text-on-error-container;
+  }
+
+  .badge-status-completed {
+    @apply badge bg-primary-fixed-dim/30 text-primary-dark;
+  }
+
+  .badge-status-no_show {
+    @apply badge bg-error/10 text-error;
+  }
+
+  .stat-card {
+    @apply card flex flex-col gap-1;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 bg-surface-container-high rounded-clinical text-sm
+           text-on-surface placeholder:text-outline
+           focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary/40
+           transition-all duration-200 outline-none;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-surface-container-lowest/85 backdrop-blur-[20px];
+  }
+}

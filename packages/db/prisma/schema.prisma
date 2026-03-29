@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Clinic & Staff ─────────────────────────────────
+
+model Clinic {
+  id           String        @id @default(cuid())
+  name         String
+  address      String
+  phone        String
+  city         String
+  lat          Float?
+  lng          Float?
+  doctors      Doctor[]
+  patients     Patient[]
+  appointments Appointment[]
+  waitlist     WaitlistEntry[]
+  auditLogs    AuditLog[]
+  users        User[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Doctor {
+  id           String        @id @default(cuid())
+  name         String
+  specialty    String
+  clinicId     String
+  clinic       Clinic        @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  appointments Appointment[]
+  waitlist     WaitlistEntry[]
+  slotDuration Int           @default(30) // minutes
+  workingHours Json          // { mon: { start: "09:00", end: "17:00" }, ... }
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// ─── Patient ────────────────────────────────────────
+
+model Patient {
+  id               String          @id @default(cuid())
+  name             String
+  phone            String          @unique
+  clinicId         String
+  clinic           Clinic          @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  lat              Float?
+  lng              Float?
+  reliabilityScore Int             @default(80) // 0–100
+  appointments     Appointment[]
+  waitlistEntries  WaitlistEntry[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+// ─── Appointment ────────────────────────────────────
+
+model Appointment {
+  id              String            @id @default(cuid())
+  doctorId        String
+  doctor          Doctor            @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  patientId       String
+  patient         Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  clinicId        String
+  clinic          Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  startTime       DateTime
+  endTime         DateTime
+  status          AppointmentStatus @default(SCHEDULED)
+  appointmentType AppointmentType   @default(ROUTINE)
+  recoveryEvents  RecoveryEvent[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([clinicId, startTime])
+  @@index([doctorId, startTime])
+  @@index([status])
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  CANCELLED
+  NO_SHOW
+  COMPLETED
+}
+
+enum AppointmentType {
+  ROUTINE
+  FOLLOW_UP
+  URGENT
+  PROCEDURE
+}
+
+// ─── Waitlist ───────────────────────────────────────
+
+model WaitlistEntry {
+  id          String         @id @default(cuid())
+  patientId   String
+  patient     Patient        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  clinicId    String
+  clinic      Clinic         @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  doctorId    String?
+  doctor      Doctor?        @relation(fields: [doctorId], references: [id], onDelete: SetNull)
+  specialty   String?
+  urgency     UrgencyLevel   @default(ROUTINE)
+  status      WaitlistStatus @default(WAITING)
+  rankScore   Float          @default(0)
+  joinedAt    DateTime       @default(now())
+  offeredAt   DateTime?
+  confirmedAt DateTime?
+
+  @@index([clinicId, status])
+  @@index([doctorId, status])
+}
+
+enum UrgencyLevel {
+  ROUTINE
+  FOLLOW_UP
+  URGENT
+}
+
+enum WaitlistStatus {
+  WAITING
+  OFFERED
+  CONFIRMED
+  EXPIRED
+  REMOVED
+}
+
+// ─── Recovery Tracking ──────────────────────────────
+
+model RecoveryEvent {
+  id                     String      @id @default(cuid())
+  cancelledAppointmentId String
+  appointment            Appointment @relation(fields: [cancelledAppointmentId], references: [id], onDelete: Cascade)
+  offeredToPatientIds    String[]
+  filledByPatientId      String?
+  recoveryTimeSeconds    Int?
+  revenueRecovered       Float?
+  createdAt              DateTime    @default(now())
+}
+
+// ─── Audit ──────────────────────────────────────────
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  clinicId  String
+  clinic    Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  actorId   String
+  action    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([clinicId, createdAt])
+}
+
+// ─── Better Auth ────────────────────────────────────
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+
+  // Custom fields
+  role          Role      @default(RECEPTIONIST)
+  clinicId      String?
+  clinic        Clinic?   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+enum Role {
+  OWNER
+  DOCTOR
+  RECEPTIONIST
+}
