@@ -1,5 +1,11 @@
 // ─── Outgoing Message Types ─────────────────────────
 
+export interface WelcomeMessage {
+  to: string; // patient phone (with country code)
+  patientName: string;
+  clinicName: string;
+}
+
 export interface SlotOfferMessage {
   to: string; // patient phone (with country code)
   patientName: string;

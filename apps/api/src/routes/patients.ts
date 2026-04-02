@@ -1,5 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { prisma } from "@carequeue/db";
+import { sendWelcome } from "@carequeue/whatsapp";
 
 export async function patientRoutes(app: FastifyInstance) {
   // ── List Patients (with search) ──
@@ -144,6 +145,17 @@ export async function patientRoutes(app: FastifyInstance) {
         metadata: { patientId: patient.id, name: patient.name },
       },
     });
+
+    // Send Welcome Message
+    try {
+      await sendWelcome({
+        to: patient.phone,
+        patientName: patient.name,
+        clinicName: clinic.name,
+      });
+    } catch (err: any) {
+      console.error("[Twilio/WhatsApp] Failed to send welcome message:", err?.message || err);
+    }
 
     return reply.status(201).send(patient);
   });

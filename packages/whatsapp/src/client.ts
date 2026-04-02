@@ -1,4 +1,5 @@
 import type {
+  WelcomeMessage,
   SlotOfferMessage,
   ReminderMessage,
   ConfirmationMessage,
@@ -33,10 +34,10 @@ async function sendMessage(
   const config = getConfig();
 
   if (isDev) {
-    console.log(`\n📱 [Twilio Mock] To: ${to}`);
+    console.log(`\n📱 [Twilio Mock Debug] To: ${to}`);
     console.log(`   Message: ${text}`);
     console.log(`   ─────────────────────────\n`);
-    return { sid: "mock_sid" };
+    // BYPASS MOCK: We removed the 'return { sid: "mock_sid" }' here so it actually attempts to send real messages even in development.
   }
 
   // Twilio expects the "whatsapp:" prefix
@@ -72,6 +73,15 @@ async function sendMessage(
 }
 
 // ─── Public API ─────────────────────────────────────
+
+export async function sendWelcome(msg: WelcomeMessage) {
+  const text =
+    `Hello ${msg.patientName}! 👋\n\n` +
+    `Welcome to ${msg.clinicName}. You have been successfully registered.\n` +
+    `If you ever need an appointment or want to join the waitlist, we'll keep you notified right here on WhatsApp!`;
+
+  return sendMessage(msg.to, text);
+}
 
 export async function sendSlotOffer(msg: SlotOfferMessage) {
   const text =

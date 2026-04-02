@@ -59,6 +59,66 @@ app.get("/api/clinics/discover", async (request, reply) => {
   return reply.send(clinic);
 });
 
+// ── Clinic creation (onboarding) ──
+app.post<{
+  Body: {
+    clinic: { name: string; address: string; city: string; phone: string; lat?: number | null; lng?: number | null };
+    doctor: { name: string; specialty: string; slotDuration: number; workingHours: any };
+  };
+}>("/api/clinics", async (request, reply) => {
+  const { prisma } = await import("@carequeue/db");
+  const { clinic: clinicData, doctor: doctorData } = request.body;
+
+  if (!clinicData?.name || !clinicData?.address || !clinicData?.city || !clinicData?.phone) {
+    return reply.status(400).send({ error: "Clinic name, address, city, and phone are required" });
+  }
+  if (!doctorData?.name || !doctorData?.specialty) {
+    return reply.status(400).send({ error: "Doctor name and specialty are required" });
+  }
+
+  const clinic = await prisma.clinic.create({
+    data: {
+      name: clinicData.name,
+      address: clinicData.address,
+      city: clinicData.city,
+      phone: clinicData.phone,
+      lat: clinicData.lat ?? null,
+      lng: clinicData.lng ?? null,
+      doctors: {
+        create: {
+          name: doctorData.name,
+          specialty: doctorData.specialty,
+          slotDuration: doctorData.slotDuration || 30,
+          workingHours: doctorData.workingHours || {},
+        },
+      },
+    },
+    include: {
+      doctors: { select: { id: true, name: true, specialty: true } },
+    },
+  });
+
+  // Link the authenticated user to this clinic if possible
+  try {
+    const headers = new Headers();
+    for (const [key, value] of Object.entries(request.headers)) {
+      if (Array.isArray(value)) value.forEach(v => headers.append(key, v));
+      else if (typeof value === "string") headers.append(key, value);
+    }
+    const session = await auth.api.getSession({ headers });
+    if (session?.user?.id) {
+      await prisma.user.update({
+        where: { id: session.user.id },
+        data: { clinicId: clinic.id, role: "OWNER" },
+      });
+    }
+  } catch {
+    // If session check fails, clinic is still created
+  }
+
+  return reply.status(201).send(clinic);
+});
+
 // ── Auth Endpoints (Web Standard Request Pipeline) ──
 app.all("/api/auth/*", async (request, reply) => {
   const origin = request.headers.origin || request.headers.referer || "";
@@ -102,7 +162,8 @@ app.addHook("preHandler", async (request, reply) => {
     url.startsWith("/api/auth") ||
     url.startsWith("/api/whatsapp") ||
     url === "/api/health" ||
-    url.startsWith("/api/clinics/discover")
+    url.startsWith("/api/clinics/discover") ||
+    (url === "/api/clinics" && request.method === "POST")
   ) {
     return;
   }

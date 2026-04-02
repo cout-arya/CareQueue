@@ -1,31 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  const isAuthPage = request.nextUrl.pathname.startsWith("/login") || request.nextUrl.pathname.startsWith("/register");
-  
-  // Try to fetch the session from our backend's better-auth instance
+  const path = request.nextUrl.pathname;
   const sessionToken = request.cookies.get("better-auth.session_token")?.value;
-  
-  if (!sessionToken && !isAuthPage && request.nextUrl.pathname !== "/") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
 
-  if (sessionToken && isAuthPage) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
+  // Public pages — never redirect these
+  const isPublicPage = path === "/" || path === "/login" || path === "/register" || path === "/onboarding";
 
-  // Handle root redirect
-  if (request.nextUrl.pathname === "/") {
-    if (sessionToken) {
+  if (isPublicPage) {
+    // If logged in and visiting login/register, send to dashboard
+    if (sessionToken && (path === "/login" || path === "/register")) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
-    } else {
-      return NextResponse.redirect(new URL("/login", request.url));
     }
+    return NextResponse.next();
+  }
+
+  // Protected dashboard pages — redirect to login if no session
+  if (!sessionToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/dashboard/:path*", "/appointments/:path*", "/waitlist/:path*", "/reports/:path*", "/login", "/register"],
+  matcher: [
+    "/",
+    "/login",
+    "/register",
+    "/onboarding",
+    "/dashboard/:path*",
+    "/patients/:path*",
+    "/appointments/:path*",
+    "/waitlist/:path*",
+    "/reports/:path*",
+    "/settings/:path*",
+  ],
 };
